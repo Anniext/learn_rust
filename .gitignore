@@ -5,3 +5,5 @@
 .kiro
 .DS_Store
 output.json
+output.yaml
+output.toml
