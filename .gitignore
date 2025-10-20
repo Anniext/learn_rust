@@ -4,6 +4,7 @@
 .crush
 .kiro
 .DS_Store
+.zed
 output.json
 output.yaml
 output.toml
