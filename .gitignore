@@ -3,7 +3,6 @@
 .vscode
 .crush
 .kiro
+.zed
 .DS_Store
-output.json
-output.yaml
-output.toml
+output/

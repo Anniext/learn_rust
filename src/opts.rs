@@ -12,7 +12,8 @@ pub struct Opts {
 
 #[derive(Debug, Parser)]
 pub enum SubCommand {
-    Csv(CsvOpts), // csv参数
+    Csv(CsvOpts),   // csv参数
+    Xlsx(XlsxOpts), // xlsx参数
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -20,6 +21,8 @@ pub enum OutFormat {
     Json,
     Yaml,
     Toml,
+    Csv,
+    Markdown,
 }
 
 #[derive(Debug, Parser)]
@@ -34,7 +37,22 @@ pub struct CsvOpts {
     #[arg(long, default_value_t = true)]
     pub header: bool, // 是否有表头
     #[arg(long, value_parser = parse_output_format, default_value = "json")]
-    pub format: OutFormat, // 是否有表头
+    pub format: OutFormat, // 输出格式
+}
+
+#[derive(Debug, Parser)]
+// XlsxOpts xlsx参数
+pub struct XlsxOpts {
+    #[arg(short, long, value_parser=verify_file_exists)]
+    pub input: String, // 输入文件路径
+    #[arg(short, long)]
+    pub output_dir: Option<String>, // 输出目录路径
+    #[arg(long, value_parser = parse_output_format, default_value = "csv")]
+    pub format: OutFormat, // 输出格式
+    #[arg(long, default_value_t = false)]
+    pub keep_empty_rows: bool, // 是否保留空行
+    #[arg(long, default_value_t = false)]
+    pub keep_whitespace: bool, // 是否保留空格
 }
 
 // verify_file_exists 验证文件是否存在
@@ -59,6 +77,8 @@ impl FromStr for OutFormat {
             "json" => Ok(OutFormat::Json),
             "yaml" => Ok(OutFormat::Yaml),
             "toml" => Ok(OutFormat::Toml),
+            "csv" => Ok(OutFormat::Csv),
+            "markdown" | "md" => Ok(OutFormat::Markdown),
             _ => Err(anyhow::anyhow!("Invalid format")),
         }
     }
@@ -71,6 +91,8 @@ impl From<OutFormat> for &'static str {
             OutFormat::Json => "json",
             OutFormat::Yaml => "yaml",
             OutFormat::Toml => "toml",
+            OutFormat::Csv => "csv",
+            OutFormat::Markdown => "md",
         }
     }
 }

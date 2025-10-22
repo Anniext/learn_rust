@@ -1,5 +1,5 @@
 use clap::Parser;
-use rcli::{Opts, SubCommand, process_csv};
+use rcli::{Opts, SubCommand, process_csv, process_xlsx};
 
 fn main() -> anyhow::Result<()> {
     let opts: Opts = Opts::parse();
@@ -11,6 +11,16 @@ fn main() -> anyhow::Result<()> {
                 format!("output.{}", opts.format)
             };
             process_csv(&opts.input, output, opts.format)?;
+        }
+        SubCommand::Xlsx(opts) => {
+            let output_dir = opts.output_dir.as_deref().unwrap_or(".");
+            process_xlsx(
+                &opts.input,
+                output_dir,
+                opts.format,
+                !opts.keep_empty_rows,
+                !opts.keep_whitespace,
+            )?;
         }
     };
 
