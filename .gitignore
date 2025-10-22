@@ -5,4 +5,5 @@
 .kiro
 .zed
 .DS_Store
-output/
+.zed
+output
