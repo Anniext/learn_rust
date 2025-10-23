@@ -5,6 +5,8 @@
 .kiro
 .DS_Store
 .zed
+fix/
+feature/
 output.json
 output.yaml
 output.toml
