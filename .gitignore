@@ -3,10 +3,15 @@
 .vscode
 .crush
 .kiro
+.zed
 .DS_Store
 .zed
+<<<<<<< HEAD
 fix/
 feature/
 output.json
 output.yaml
 output.toml
+=======
+output
+>>>>>>> d2b8c0fffa5d809d904470f6aeb5b754ab678d4f
