@@ -1,4 +1,3 @@
-/target
 .idea
 .vscode
 .crush
@@ -6,12 +5,9 @@
 .zed
 .DS_Store
 .zed
-<<<<<<< HEAD
-fix/
-feature/
-output.json
-output.yaml
-output.toml
-=======
+
+
+fix
+feature
 output
->>>>>>> d2b8c0fffa5d809d904470f6aeb5b754ab678d4f
+target
